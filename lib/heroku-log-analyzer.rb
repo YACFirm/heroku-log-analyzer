@@ -1,0 +1,3 @@
+class HerokuLogAnalyzer
+
+end
