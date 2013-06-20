@@ -1,3 +1,1 @@
-class HerokuLogAnalyzer
-
-end
+require 'heroku-log-analyzer/base'
