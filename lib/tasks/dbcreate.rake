@@ -2,13 +2,12 @@ require "heroku-log-analyzer"
 
 
 namespace :logdb do
-  Log = HerokuLogAnalyzer::Log
   task :create do
     class FakeMigration < ActiveRecord::Migration
       def up
         @table_name = "logs"
         @columns = HerokuLogAnalyzer.configuration.columns
-        unless Log.table_exists?
+        unless HerokuLogAnalyzer::Log.table_exists?
           create_table @table_name do |t|
             t.datetime :date
             t.string :drain
@@ -24,20 +23,16 @@ namespace :logdb do
           remove_index(@table_name, column_data[:name]) if not column_data[:indexed] and is_indexed
         end
 
-        current_columns = Log.columns_hash.keys
+        current_columns = HerokuLogAnalyzer::Log.columns_hash.keys
         all_columns = %w|date drain source full_text| + @columns.map {|k, v| v[:name]}
 
         new_columns = all_columns - current_columns
         unused_columns = current_columns - all_columns
 
-        puts new_columns
-        puts unused_columns
-
         remove_column(@table_name, *unused_columns) unless unused_columns.empty?
 
         new_columns.each do |column_name|
-          column_data = @columns[column_name]
-          add_column(@table_name, column_data[:name], :string, {})
+          add_column(@table_name, column_name, :string, {})
         end
 
         @columns.each do |k, column_data|

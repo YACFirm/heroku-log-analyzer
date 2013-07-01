@@ -20,6 +20,7 @@ module HerokuLogAnalyzer
         "fwd" => {name: "fwd", regex: /.*/, indexed: false},
         "service" => {name: "service", regex: /.*/, indexed: false},
         "status" => {name: "status", regex: /.*/, indexed: false},
+        "path" => {name: "path", regex: /.*/, indexed: false},
         "bytes" => {name: "bytes", regex: /.*/, indexed: false},
       }
 
