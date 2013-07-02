@@ -9,7 +9,7 @@ module HerokuLogAnalyzer
   end
 
   class Configuration
-    attr_accessor :columns
+    attr_accessor :columns, :database_connection
 
     def initialize
       @columns = {
@@ -23,11 +23,6 @@ module HerokuLogAnalyzer
         "path" => {name: "path", regex: /.*/, indexed: false},
         "bytes" => {name: "bytes", regex: /.*/, indexed: false},
       }
-
-      ActiveRecord::Base.establish_connection(
-        adapter: 'sqlite3',
-        database: 'test.db'
-      )
     end
   end
 end

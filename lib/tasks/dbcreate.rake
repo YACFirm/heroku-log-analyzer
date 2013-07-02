@@ -24,7 +24,7 @@ namespace :logdb do
         end
 
         current_columns = HerokuLogAnalyzer::Log.columns_hash.keys
-        all_columns = %w|date drain source full_text| + @columns.map {|k, v| v[:name]}
+        all_columns = %w|date drain source full_text id| + @columns.map {|k, v| v[:name]}
 
         new_columns = all_columns - current_columns
         unused_columns = current_columns - all_columns
