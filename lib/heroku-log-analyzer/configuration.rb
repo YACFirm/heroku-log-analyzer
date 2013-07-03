@@ -9,7 +9,7 @@ module HerokuLogAnalyzer
   end
 
   class Configuration
-    attr_accessor :columns, :database_connection
+    attr_accessor :columns, :database_connection, :column_options
 
     def initialize
       @columns = {
@@ -23,6 +23,8 @@ module HerokuLogAnalyzer
         "path" => {name: "path", regex: /.*/, indexed: false},
         "bytes" => {name: "bytes", regex: /.*/, indexed: false},
       }
+
+      @column_options = {}
     end
   end
 end
