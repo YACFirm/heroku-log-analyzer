@@ -56,12 +56,14 @@ namespace :logdb do
 
   def process_batch(bang=false)
     return nil if @batch.size < 1000 and not bang
+    logs = []
     @batch.each do |request_id, data|
       if must_ignore? data
         next
       end
-      l = HerokuLogAnalyzer::Log.create data
+      logs << HerokuLogAnalyzer::Log.new(data)
     end
+    HerokuLogAnalyzer::Log.import logs
     @batch = {}
   end
 
