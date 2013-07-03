@@ -55,7 +55,7 @@ namespace :logdb do
   end
 
   def process_batch(bang=false)
-    return nil if @batch.size < 1000 and not bang
+    return nil if @batch.size < 50000 and not bang
     logs = []
     @batch.each do |request_id, data|
       if must_ignore? data
@@ -64,6 +64,7 @@ namespace :logdb do
       logs << HerokuLogAnalyzer::Log.new(data)
     end
     HerokuLogAnalyzer::Log.import logs
+    puts "processed batch"
     @batch = {}
   end
 
