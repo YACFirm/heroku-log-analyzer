@@ -3,7 +3,7 @@ require "heroku-log-analyzer"
 namespace :logdb do
   def init
     @current_columns = HerokuLogAnalyzer::Log.columns_hash.keys
-    @data_regex = /(?<key>\S+)=(?<val>\S+)/
+    @data_regex = /(?<key>[^=\s]+)=(?<val>\S+)/
     @date_regex = /^(?<date>\S+) (?<drain>\S+) (?<source>[a-zA-Z\[\]\.]+)/
     @columns = HerokuLogAnalyzer.configuration.columns
     @column_options = HerokuLogAnalyzer.configuration.column_options

@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name = "heroku-log-analyzer"
-  s.version = "0.0.2"
-  s.date = "2013-06-19"
+  s.version = "0.0.3"
+  s.date = "2013-07-10"
   s.summary = "Heroku log parser and storage"
   s.description = "desc"
   s.authors = ["YACFirm"]
